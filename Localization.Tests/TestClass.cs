@@ -73,7 +73,7 @@ val2;v2_en; v2_ru";
         public void LoclaizeImplement()
         {
             var loc = new LocalizationImplementation();
-            loc.LoadLocalFile(csvLang);
+            loc.LoadLanguagesFromFile(csvLang);
 
             loc.CurrentCulture = "en";
             loc["val1"].ShouldBeEquivalentTo("v1_en");
@@ -92,7 +92,7 @@ val2;v2_en; v2_ru";
         public void LoclaizeImplementNewLanguage()
         {
             var loc = new LocalizationImplementation();
-            loc.LoadLocalFile(csvLang);
+            loc.LoadLanguagesFromFile(csvLang);
 
             loc.CurrentCulture = "en";
             loc["val1"].ShouldBeEquivalentTo("v1_en");
@@ -106,7 +106,7 @@ val2;v2_en; v2_ru";
         public void LoclaizeImplementEmptyFile()
         {
             var loc = new LocalizationImplementation();
-            loc.LoadLocalFile(string.Empty);
+            loc.LoadLanguagesFromFile(string.Empty);
 
             loc.CurrentCulture = "en";
             loc["val1"].ShouldBeEquivalentTo(string.Empty);
