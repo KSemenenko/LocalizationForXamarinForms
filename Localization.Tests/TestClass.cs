@@ -1,25 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using FluentAssertions;
 using Localization.Shared.Parsers;
 using NUnit.Framework;
+using Plugin.Localization;
 
 namespace Localization.Tests
 {
     [TestFixture]
     public class TestClass
     {
-        private readonly string csv = @"a1;a2;a3b1;""b2; b5""; b3c1; c2; c3";
+        private readonly string csv = @"a1;a2;a3
+b1;""b2; b5""; b3
+c1; c2; c3";
+
+        private readonly string csvLang = @";en;ru
+val1;v1_en; v1_ru
+val2;v2_en; v2_ru";
 
         private readonly string[] sampleList = {"a1", "a2", "a3", "b1", "b2; b5", "b3", "c1", "c2", "c3"};
 
         [Test]
-        public void TestMethod1()
+        public void ReadAllRows()
         {
             using(var reader = new CsvFileReader(csv, ';'))
             {
                 var resultList = new List<string>();
-                foreach(var row in reader.ReadRow())
+                foreach(var row in reader.ReadAllRows())
                 {
                     foreach(var s in row)
                     {
@@ -32,8 +41,79 @@ namespace Localization.Tests
         }
 
         [Test]
-        public void TestMethod2()
+        public void ReadHeader()
         {
+            var reader = new CsvFileReader(csv);
+            var header = reader.ReadHeader();
+
+            header.ToArray().ShouldBeEquivalentTo(sampleList.Take(3));
+
+        }
+
+        [Test]
+        public void ReadRows()
+        {
+            using (var reader = new CsvFileReader(csv, ';'))
+            {
+                var resultList = new List<string>();
+                foreach (var row in reader.ReadRows())
+                {
+                    foreach (var s in row)
+                    {
+                        resultList.Add(s);
+                    }
+                }
+
+                resultList.ToArray().ShouldBeEquivalentTo(sampleList.Skip(3));
+            }
+
+        }
+
+        [Test]
+        public void LoclaizeImplement()
+        {
+            var loc = new LocalizationImplementation();
+            loc.LoadLocalFile(csvLang);
+
+            loc.CurrentCulture = "en";
+            loc["val1"].ShouldBeEquivalentTo("v1_en");
+
+            loc.CurrentCulture = "ru";
+            loc["val1"].ShouldBeEquivalentTo("v1_ru");
+
+            loc.CurrentCulture = "en";
+            loc["val2"].ShouldBeEquivalentTo("v2_en");
+
+            loc.CurrentCulture = "ru";
+            loc["val2"].ShouldBeEquivalentTo("v2_ru");
+        }
+
+        [Test]
+        public void LoclaizeImplementNewLanguage()
+        {
+            var loc = new LocalizationImplementation();
+            loc.LoadLocalFile(csvLang);
+
+            loc.CurrentCulture = "en";
+            loc["val1"].ShouldBeEquivalentTo("v1_en");
+
+            loc.CurrentCulture = "fr";
+            loc["val1"].ShouldBeEquivalentTo("v1_en");
+
+        }
+
+        [Test]
+        public void LoclaizeImplementEmptyFile()
+        {
+            var loc = new LocalizationImplementation();
+            loc.LoadLocalFile(string.Empty);
+
+            loc.CurrentCulture = "en";
+            loc["val1"].ShouldBeEquivalentTo(string.Empty);
+
+            loc.CurrentCulture = "fr";
+            loc["val1"].ShouldBeEquivalentTo(string.Empty);
+
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Localization.Shared.Parsers
             this.delimiter = delimiter;
         }
 
-        public IEnumerable<CsvRow> ReadRow()
+        public IEnumerable<CsvRow> ReadAllRows()
         {
             foreach(var line in ReadCompleteLine())
             {
@@ -62,6 +62,25 @@ namespace Localization.Shared.Parsers
             }
         }
 
+        public CsvRow ReadHeader()
+        {
+            var enumerator = ReadAllRows().GetEnumerator();
+            if(enumerator.MoveNext())
+            {
+                if(enumerator.Current != null)
+                {
+                    return enumerator.Current;
+                }
+            }
+
+            return new CsvRow();
+        }
+
+        public IEnumerable<CsvRow> ReadRows()
+        {
+            return ReadAllRows().Skip(1); //Skip Header
+        }
+
         private string ReplaceKeys(string s, Dictionary<string, string> keys)
         {
             s = keys.Keys.Reverse().Aggregate(s, (current, key) => current.Replace(key, keys[key]));
@@ -73,7 +92,10 @@ namespace Localization.Shared.Parsers
             string line;
             var completeLine = string.Empty;
 
-            while((line = ReadLine()) != null)
+            BaseStream.Position = 0;
+            DiscardBufferedData();
+
+            while ((line = ReadLine()) != null)
             {
                 completeLine += "\n" + line;
                 if(completeLine.ToCharArray().Count(c => c == '"')%2 == 0)

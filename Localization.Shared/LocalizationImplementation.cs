@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Localization.Shared.Parsers;
 using Plugin.Localization.Abstractions;
 
 namespace Plugin.Localization
 {
     public partial class LocalizationImplementation : ILocalization
     {
-        private Dictionary<string, string> languageDictionary = new Dictionary<string, string>();
+        private Dictionary<string, Dictionary<string, string>> languageDictionary = new Dictionary<string, Dictionary<string, string>>();
 
         public LocalizationImplementation()
         {
@@ -28,16 +31,69 @@ namespace Plugin.Localization
 
         public CultureInfo CurrentCultureInfo { get; set; } = CultureInfo.InvariantCulture;
 
+        public string Delimiter { get; set; } = string.Empty;
+
         public void LoadLocalFile(string path)
         {
             var content = FileLoad(path);
+
+            CsvFileReader reader = string.IsNullOrEmpty(Delimiter) ? new CsvFileReader(content) : new CsvFileReader(content, Delimiter[0]);
+
+            MakeDictionary(reader);
+            FillDictionary(reader);
+
         }
+
+        private void MakeDictionary(CsvFileReader reader)
+        {
+            languageDictionary = new Dictionary<string, Dictionary<string, string>>();
+            foreach (var header in reader.ReadHeader())
+            {
+                if(!string.IsNullOrEmpty(header))
+                {
+                    languageDictionary.Add(header, new Dictionary<string, string>());
+                }
+            }
+        }
+
+        private void FillDictionary(CsvFileReader reader)
+        {
+            foreach (var row in reader.ReadRows())
+            {
+                int count = 1;
+                foreach (var item in languageDictionary)
+                {
+                    item.Value.Add(row[0],row[count]);
+                    count++;
+                }
+            }
+        }
+
 
         public string this[string key]
         {
             get
             {
-                return ";";
+                Dictionary<string, string> langDictionary;
+                if(!languageDictionary.TryGetValue(CurrentCulture, out langDictionary))
+                {
+                    langDictionary = languageDictionary.FirstOrDefault().Value;
+
+                    if(langDictionary == null)
+                    {
+                        langDictionary = new Dictionary<string, string>();
+                    }
+
+                }
+
+                string message;
+                if (langDictionary.TryGetValue(key, out message))
+                {
+                    return message;
+                }
+
+
+                return string.Empty;
                 
             }
             set

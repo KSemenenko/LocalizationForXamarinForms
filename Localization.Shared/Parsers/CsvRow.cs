@@ -9,5 +9,6 @@ namespace Localization.Shared.Parsers
     public class CsvRow : List<string>
     {
         public string LineText { get; set; }
+
     }
 }

@@ -6,7 +6,7 @@ namespace Plugin.Localization
     {
         private string FileLoad(string path)
         {
-            return string.Empty;
+            return path;
         }
     }
 }
