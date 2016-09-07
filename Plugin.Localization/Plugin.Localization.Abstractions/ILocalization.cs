@@ -8,7 +8,9 @@ namespace Plugin.Localization.Abstractions
     /// </summary>
     public interface ILocalization
     {
-        void LoadLocalFile(string path);
+        void LoadLanguagesFromFile(string path);
+
+        void LoadLanguagesFromString(string content);
 
         string this[string key] { get; set; }
 

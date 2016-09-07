@@ -1,8 +1,9 @@
 ﻿using System;
+using Plugin.Localization;
 using Plugin.Localization.Abstractions;
 
 
-namespace Plugin.Localization
+namespace Plugin.Localizing
 {
     /// <summary>
     /// Cross platform Plugin.Localization implemenations

@@ -16,7 +16,7 @@ namespace Plugin.Localization
 
         public LocalizationImplementation()
         {
-            
+            CurrentCultureInfo = CultureInfo.CurrentCulture;
         }
 
         public LocalizationImplementation(CultureInfo cultureInfo)
@@ -29,14 +29,23 @@ namespace Plugin.Localization
             CurrentCulture = cultureInfo;
         }
 
-        public CultureInfo CurrentCultureInfo { get; set; } = CultureInfo.InvariantCulture;
+        public CultureInfo CurrentCultureInfo { get; set; }
 
         public string Delimiter { get; set; } = string.Empty;
 
-        public void LoadLocalFile(string path)
+        public void LoadLanguagesFromFile(string path)
         {
             var content = FileLoad(path);
 
+            CsvFileReader reader = string.IsNullOrEmpty(Delimiter) ? new CsvFileReader(content) : new CsvFileReader(content, Delimiter[0]);
+
+            MakeDictionary(reader);
+            FillDictionary(reader);
+
+        }
+
+        public void LoadLanguagesFromString(string content)
+        {
             CsvFileReader reader = string.IsNullOrEmpty(Delimiter) ? new CsvFileReader(content) : new CsvFileReader(content, Delimiter[0]);
 
             MakeDictionary(reader);
@@ -51,7 +60,7 @@ namespace Plugin.Localization
             {
                 if(!string.IsNullOrEmpty(header))
                 {
-                    languageDictionary.Add(header, new Dictionary<string, string>());
+                    languageDictionary.Add(header.ToLowerInvariant(), new Dictionary<string, string>());
                 }
             }
         }
@@ -104,7 +113,7 @@ namespace Plugin.Localization
 
         public string CurrentCulture
         {
-            get { return CurrentCultureInfo.Name; }
+            get { return CurrentCultureInfo.Name.ToLowerInvariant(); }
             set
             {
                 CurrentCultureInfo = new CultureInfo(value);

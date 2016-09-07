@@ -6,6 +6,7 @@ using System.Text;
 using Plugin.Localization;
 using Xamarin.Forms;
 
+
 namespace TestFormsApp
 {
     public class App : Application
@@ -13,10 +14,13 @@ namespace TestFormsApp
         public App()
         {
 
+
             B_Clicked(null, null);
             var button = new Button();
-            button.Text = "ClickMe";
+            button.Text = Plugin.Localizing.Localization.Current["message2"];
             button.Clicked += B_Clicked;
+
+            
 
             // The root page of your application
             MainPage = new ContentPage
@@ -29,7 +33,7 @@ namespace TestFormsApp
                         new Label
                         {
                             HorizontalTextAlignment = TextAlignment.Center,
-                            Text = "Welcome to Xamarin Forms!"
+                            Text = Plugin.Localizing.Localization.Current["message1"]
                         },
                         button,
                     }
@@ -39,8 +43,19 @@ namespace TestFormsApp
 
         private void B_Clicked(object sender, EventArgs e)
         {
+            if(Plugin.Localizing.Localization.Current.CurrentCulture == "en-US")
+            {
+                Plugin.Localizing.Localization.Current.CurrentCulture = "ru-ru";
+            }
+            else
+            {
+                Plugin.Localizing.Localization.Current.CurrentCulture = "en-US";
+            }
 
-           
+
+
+
+
         }
 
         protected override void OnStart()
