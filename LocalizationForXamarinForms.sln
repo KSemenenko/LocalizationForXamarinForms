@@ -58,6 +58,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Localization.Shared\Localization.Shared.projitems*{2882aeeb-d4cd-4eb9-8a6c-6653b33681f0}*SharedItemsImports = 4
 		Localization.Shared\Localization.Shared.projitems*{2be19bda-c26e-4c6e-8b27-148ea06d2266}*SharedItemsImports = 13
+		Localization.Shared\Localization.Shared.projitems*{2d4e302b-5f6a-4eca-9e2d-681b9dd64d84}*SharedItemsImports = 4
 		Localization.Shared\Localization.Shared.projitems*{56a56f17-7de1-4ca1-9617-bf32e971ac84}*SharedItemsImports = 4
 		Localization.Shared\Localization.Shared.projitems*{5876144b-47dd-4c4e-b421-bc03f191b996}*SharedItemsImports = 4
 		TestFormsApp\TestFormsApp\TestFormsApp.projitems*{5f2506ea-00bd-4542-960e-5aa21b14f490}*SharedItemsImports = 4

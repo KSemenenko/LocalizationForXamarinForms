@@ -7,9 +7,9 @@
     <title>Localization Plugin for Xamarin and Windows</title>
     <authors>ksemenenko</authors>
     <owners>ksemenenko</owners>
-    <licenseUrl>https://github.com/KSemenenko/LocalizingForXamarinForms/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/KSemenenko/LocalizingForXamarinForms</projectUrl>
-    <!--<iconUrl>https://github.com/KSemenenko/LocalizingForXamarinForms/icons/plugin_icon_nuget.png</iconUrl>-->
+    <licenseUrl>https://github.com/KSemenenko/LocalizationForXamarinForms/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/KSemenenko/LocalizationForXamarinForms</projectUrl>
+    <!--<iconUrl>https://github.com/KSemenenko/LocalizationForXamarinForms/icons/plugin_icon_nuget.png</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
       This project is a cross platform library for Xamarin, which enables a handy use of localization in your applications.

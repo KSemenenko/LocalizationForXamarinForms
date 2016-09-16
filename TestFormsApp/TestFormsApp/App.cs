@@ -17,7 +17,7 @@ namespace TestFormsApp
 
             B_Clicked(null, null);
             var button = new Button();
-            button.Text = Plugin.Localizing.Localization.Current["message2"];
+            button.Text = CrossLocalization.Current["message2"];
             button.Clicked += B_Clicked;
 
             
@@ -33,7 +33,7 @@ namespace TestFormsApp
                         new Label
                         {
                             HorizontalTextAlignment = TextAlignment.Center,
-                            Text = Plugin.Localizing.Localization.Current["message1"]
+                            Text = CrossLocalization.Current["message1"]
                         },
                         button,
                     }
@@ -43,13 +43,13 @@ namespace TestFormsApp
 
         private void B_Clicked(object sender, EventArgs e)
         {
-            if(Plugin.Localizing.Localization.Current.CurrentCulture == "en-US")
+            if(CrossLocalization.Current.CurrentCulture == "en-US")
             {
-                Plugin.Localizing.Localization.Current.CurrentCulture = "ru-ru";
+                CrossLocalization.Current.CurrentCulture = "ru-ru";
             }
             else
             {
-                Plugin.Localizing.Localization.Current.CurrentCulture = "en-US";
+                CrossLocalization.Current.CurrentCulture = "en-US";
             }
 
 

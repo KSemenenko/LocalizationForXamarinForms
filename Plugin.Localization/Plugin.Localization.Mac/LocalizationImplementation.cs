@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Plugin.Localization.Abstractions;
 
-namespace Plugin.Localization
+namespace Plugin.GoogleAnalytics
 {
     public partial class LocalizationImplementation : ILocalization
     {
@@ -9,6 +9,5 @@ namespace Plugin.Localization
         {
             return File.ReadAllText(path);
         }
-
     }
 }

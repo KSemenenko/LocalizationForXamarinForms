@@ -3,12 +3,12 @@ using Plugin.Localization;
 using Plugin.Localization.Abstractions;
 
 
-namespace Plugin.Localizing
+namespace Plugin.Localization
 {
     /// <summary>
     /// Cross platform Plugin.Localization implemenations
     /// </summary>
-    public class Localization
+    public class CrossLocalization
     {
         private static readonly Lazy<ILocalization> Implementation = 
             new Lazy<ILocalization>(CreatePluginLocalization, System.Threading.LazyThreadSafetyMode.PublicationOnly);
