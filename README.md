@@ -29,9 +29,10 @@ https://www.nuget.org/packages/ksemenenko.Localization/
 ```
 
 
-## Example csv
+## Example csv structure:
 |default:en-us|en-us|ru-ru|
 | ------------------- | :-----------: | :------------------: |
 |MainMenu_News|News|Новости|
 |MainMenu_Home|Home|Домой|
+|STRING_NAME|ENG_VALUE|RU_VALUE|
 
