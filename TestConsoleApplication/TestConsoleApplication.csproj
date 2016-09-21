@@ -52,11 +52,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Plugin.Localization\Plugin.Localization.Abstractions\Plugin.Localization.Abstractions.csproj">
       <Project>{6edb0588-ffc5-4ef5-8a99-9e241d0f878d}</Project>
-      <Name>Plugin.GoogleAnalytics.Abstractions</Name>
+      <Name>Plugin.Localization.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Plugin.Localization\Plugin.Localization\Plugin.Localization.csproj">
       <Project>{a6fcef44-d2ba-42c7-b3cb-13667bcd7b54}</Project>
-      <Name>Plugin.GoogleAnalytics</Name>
+      <Name>Plugin.Localization</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

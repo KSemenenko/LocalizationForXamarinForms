@@ -25,7 +25,7 @@ namespace TestFormsApp.Droid
                 content = sr.ReadToEnd();
             }
 
-            Plugin.Localizing.Localization.Current.LoadLanguagesFromString(content);
+            Plugin.Localization.CrossLocalization.Current.LoadLanguagesFromString(content);
 
 
             LoadApplication(new TestFormsApp.App());
