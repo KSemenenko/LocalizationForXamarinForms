@@ -9,6 +9,5 @@ namespace Plugin.Localization
         {
             return File.ReadAllText(path);
         }
-
     }
 }

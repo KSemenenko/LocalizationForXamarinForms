@@ -46,7 +46,7 @@ namespace TestFormsApp.WinPhone
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            if(System.Diagnostics.Debugger.IsAttached)
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
@@ -111,7 +111,7 @@ namespace TestFormsApp.WinPhone
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
         {
             var rootFrame = sender as Frame;
-            rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
+            rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() {new NavigationThemeTransition()};
             rootFrame.Navigated -= this.RootFrame_FirstNavigated;
         }
 

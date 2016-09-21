@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8.3">
     <id>ksemenenko.Localization</id>
-    <version>0.0.1.0-pre</version>
+    <version>0.0.1.0</version>
     <title>Localization Plugin for Xamarin and Windows</title>
     <authors>ksemenenko</authors>
     <owners>ksemenenko</owners>
@@ -15,8 +15,8 @@
       This project is a cross platform library for Xamarin, which enables a handy use of localization in your applications.
     </description>
     <summary>Localization Plugin for Xamarin and Windows</summary>
-    <tags>xamarin, localization, pcl, plugin, plugin for xamarin, windows phone, uwp, winphone, wp8, winrt, android, xamarin.forms, ios, mac, version</tags>
-    <dependencies>
+    <tags>xamarin, localization, language, pcl, plugin, plugin for xamarin, windows phone, uwp, winphone, wp8, winrt, android, xamarin.forms, ios, mac, version</tags>
+    <!--<dependencies>
       <group targetFramework="UAP10"/>
       <group targetFramework="wp8"/>
       <group targetFramework="wpa81"/>
@@ -26,88 +26,141 @@
       <group targetFramework="XamariniOS10"/>
       <group targetFramework="XamarinMac20"/>
       <group targetFramework="MonoTouch"/>
-    </dependencies>
+    </dependencies>-->
   </metadata>
   <files>
-    
+
     <!--Portable Profile259 -->
-    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.dll" target="lib\portable-net45+win8+wpa81+wp8\Plugin.Localization.dll" />
-    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.xml" target="lib\portable-net45+win8+wpa81+wp8\Plugin.Localization.xml" />
-    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.pdb" target="lib\portable-net45+win8+wpa81+wp8\Plugin.Localization.pdb" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll" target="lib\portable-net45+win8+wpa81+wp8\Plugin.Localization.Abstractions.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml" target="lib\portable-net45+win8+wpa81+wp8\Plugin.Localization.Abstractions.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb" target="lib\portable-net45+win8+wpa81+wp8\Plugin.Localization.Abstractions.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.dll"
+          target="lib\portable-net45+win8+wpa81+wp8\Plugin.Localization.dll" />
+    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.xml"
+          target="lib\portable-net45+win8+wpa81+wp8\Plugin.Localization.xml" />
+    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.pdb"
+          target="lib\portable-net45+win8+wpa81+wp8\Plugin.Localization.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll"
+          target="lib\portable-net45+win8+wpa81+wp8\Plugin.Localization.Abstractions.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml"
+          target="lib\portable-net45+win8+wpa81+wp8\Plugin.Localization.Abstractions.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb"
+          target="lib\portable-net45+win8+wpa81+wp8\Plugin.Localization.Abstractions.pdb" />
 
 
-    <!--Portable Profile111 -->                                                                                              
-    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.dll" target="lib\portable-net45+win8+wpa81\Plugin.Localization.dll" />
-    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.xml" target="lib\portable-net45+win8+wpa81\Plugin.Localization.xml" />
-    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.pdb" target="lib\portable-net45+win8+wpa81\Plugin.Localization.pdb" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll" target="lib\portable-net45+win8+wpa81\Plugin.Localization.Abstractions.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml" target="lib\portable-net45+win8+wpa81\Plugin.Localization.Abstractions.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb" target="lib\portable-net45+win8+wpa81\Plugin.Localization.Abstractions.pdb" />
-    
-    <!--Portable Profile78 -->                                                                                              
-    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.dll" target="lib\portable-net45+win8+wp8\Plugin.Localization.dll" />
-    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.xml" target="lib\portable-net45+win8+wp8\Plugin.Localization.xml" />
-    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.pdb" target="lib\portable-net45+win8+wp8\Plugin.Localization.pdb" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll" target="lib\portable-net45+win8+wp8\Plugin.Localization.Abstractions.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml" target="lib\portable-net45+win8+wp8\Plugin.Localization.Abstractions.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb" target="lib\portable-net45+win8+wp8\Plugin.Localization.Abstractions.pdb" />
+    <!--Portable Profile111 -->
+    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.dll"
+          target="lib\portable-net45+win8+wpa81\Plugin.Localization.dll" />
+    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.xml"
+          target="lib\portable-net45+win8+wpa81\Plugin.Localization.xml" />
+    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.pdb"
+          target="lib\portable-net45+win8+wpa81\Plugin.Localization.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll"
+          target="lib\portable-net45+win8+wpa81\Plugin.Localization.Abstractions.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml"
+          target="lib\portable-net45+win8+wpa81\Plugin.Localization.Abstractions.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb"
+          target="lib\portable-net45+win8+wpa81\Plugin.Localization.Abstractions.pdb" />
 
-    <!--MonoTouch-->                                                                                              
-    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.dll" target="lib\MonoTouch\Plugin.Localization.dll" />
-    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.xml" target="lib\MonoTouch\Plugin.Localization.xml" />
-    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.pdb" target="lib\MonoTouch\Plugin.Localization.pdb" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll" target="lib\MonoTouch\Plugin.Localization.Abstractions.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml" target="lib\MonoTouch\Plugin.Localization.Abstractions.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb" target="lib\MonoTouch\Plugin.Localization.Abstractions.pdb" />
-    
+    <!--Portable Profile78 -->
+    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.dll"
+          target="lib\portable-net45+win8+wp8\Plugin.Localization.dll" />
+    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.xml"
+          target="lib\portable-net45+win8+wp8\Plugin.Localization.xml" />
+    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.pdb"
+          target="lib\portable-net45+win8+wp8\Plugin.Localization.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll"
+          target="lib\portable-net45+win8+wp8\Plugin.Localization.Abstractions.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml"
+          target="lib\portable-net45+win8+wp8\Plugin.Localization.Abstractions.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb"
+          target="lib\portable-net45+win8+wp8\Plugin.Localization.Abstractions.pdb" />
+
+    <!--MonoTouch-->
+    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.dll"
+          target="lib\MonoTouch\Plugin.Localization.dll" />
+    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.xml"
+          target="lib\MonoTouch\Plugin.Localization.xml" />
+    <file src="Plugin.Localization\Plugin.Localization\bin\Release\Plugin.Localization.pdb"
+          target="lib\MonoTouch\Plugin.Localization.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll"
+          target="lib\MonoTouch\Plugin.Localization.Abstractions.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml"
+          target="lib\MonoTouch\Plugin.Localization.Abstractions.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb"
+          target="lib\MonoTouch\Plugin.Localization.Abstractions.pdb" />
+
     <!--WP81-->
-    <file src="Plugin.Localization\Plugin.Localization.WindowsPhone81\bin\Release\Plugin.Localization.dll" target="lib\wpa81\Plugin.Localization.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.WindowsPhone81\bin\Release\Plugin.Localization.xml" target="lib\wpa81\Plugin.Localization.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.WindowsPhone81\bin\Release\Plugin.Localization.pdb" target="lib\wpa81\Plugin.Localization.pdb" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll" target="lib\wpa81\Plugin.Localization.Abstractions.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml" target="lib\wpa81\Plugin.Localization.Abstractions.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb" target="lib\wpa81\Plugin.Localization.Abstractions.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.WindowsPhone81\bin\Release\Plugin.Localization.dll"
+          target="lib\wpa81\Plugin.Localization.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.WindowsPhone81\bin\Release\Plugin.Localization.xml"
+          target="lib\wpa81\Plugin.Localization.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.WindowsPhone81\bin\Release\Plugin.Localization.pdb"
+          target="lib\wpa81\Plugin.Localization.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll"
+          target="lib\wpa81\Plugin.Localization.Abstractions.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml"
+          target="lib\wpa81\Plugin.Localization.Abstractions.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb"
+          target="lib\wpa81\Plugin.Localization.Abstractions.pdb" />
 
     <!--WinStore-->
-    <file src="Plugin.Localization\Plugin.Localization.WindowsStore\bin\Release\Plugin.Localization.dll" target="lib\win8\Plugin.Localization.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.WindowsStore\bin\Release\Plugin.Localization.xml" target="lib\win8\Plugin.Localization.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.WindowsStore\bin\Release\Plugin.Localization.pdb" target="lib\win8\Plugin.Localization.pdb" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll" target="lib\win8\Plugin.Localization.Abstractions.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml" target="lib\win8\Plugin.Localization.Abstractions.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb" target="lib\win8\Plugin.Localization.Abstractions.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.WindowsStore\bin\Release\Plugin.Localization.dll"
+          target="lib\win8\Plugin.Localization.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.WindowsStore\bin\Release\Plugin.Localization.xml"
+          target="lib\win8\Plugin.Localization.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.WindowsStore\bin\Release\Plugin.Localization.pdb"
+          target="lib\win8\Plugin.Localization.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll"
+          target="lib\win8\Plugin.Localization.Abstractions.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml"
+          target="lib\win8\Plugin.Localization.Abstractions.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb"
+          target="lib\win8\Plugin.Localization.Abstractions.pdb" />
 
     <!--Xamarin.Android-->
-    <file src="Plugin.Localization\Plugin.Localization.Android\bin\Release\Plugin.Localization.dll" target="lib\MonoAndroid10\Plugin.Localization.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.Android\bin\Release\Plugin.Localization.xml" target="lib\MonoAndroid10\Plugin.Localization.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.Android\bin\Release\Plugin.Localization.pdb" target="lib\MonoAndroid10\Plugin.Localization.pdb" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll" target="lib\MonoAndroid10\Plugin.Localization.Abstractions.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml" target="lib\MonoAndroid10\Plugin.Localization.Abstractions.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb" target="lib\MonoAndroid10\Plugin.Localization.Abstractions.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.Android\bin\Release\Plugin.Localization.dll"
+          target="lib\MonoAndroid10\Plugin.Localization.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.Android\bin\Release\Plugin.Localization.xml"
+          target="lib\MonoAndroid10\Plugin.Localization.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.Android\bin\Release\Plugin.Localization.pdb"
+          target="lib\MonoAndroid10\Plugin.Localization.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll"
+          target="lib\MonoAndroid10\Plugin.Localization.Abstractions.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml"
+          target="lib\MonoAndroid10\Plugin.Localization.Abstractions.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb"
+          target="lib\MonoAndroid10\Plugin.Localization.Abstractions.pdb" />
 
     <!--Xamarin.iOS-->
-    <file src="Plugin.Localization\Plugin.Localization.iOS\bin\Release\Plugin.Localization.dll" target="lib\XamariniOS10\Plugin.Localization.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.iOS\bin\Release\Plugin.Localization.xml" target="lib\XamariniOS10\Plugin.Localization.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll" target="lib\XamariniOS10\Plugin.Localization.Abstractions.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml" target="lib\XamariniOS10\Plugin.Localization.Abstractions.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb" target="lib\XamariniOS10\Plugin.Localization.Abstractions.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.iOS\bin\Release\Plugin.Localization.dll"
+          target="lib\XamariniOS10\Plugin.Localization.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.iOS\bin\Release\Plugin.Localization.xml"
+          target="lib\XamariniOS10\Plugin.Localization.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll"
+          target="lib\XamariniOS10\Plugin.Localization.Abstractions.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml"
+          target="lib\XamariniOS10\Plugin.Localization.Abstractions.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb"
+          target="lib\XamariniOS10\Plugin.Localization.Abstractions.pdb" />
 
     <!--UWP-->
-    <file src="Plugin.Localization\Plugin.Localization.UWP\bin\Release\Plugin.Localization.dll" target="lib\UAP10\Plugin.Localization.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.UWP\bin\Release\Plugin.Localization.xml" target="lib\UAP10\Plugin.Localization.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.UWP\bin\Release\Plugin.Localization.pdb" target="lib\UAP10\Plugin.Localization.pdb" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll" target="lib\UAP10\Plugin.Localization.Abstractions.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml" target="lib\UAP10\Plugin.Localization.Abstractions.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb" target="lib\UAP10\Plugin.Localization.Abstractions.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.UWP\bin\Release\Plugin.Localization.dll"
+          target="lib\UAP10\Plugin.Localization.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.UWP\bin\Release\Plugin.Localization.xml"
+          target="lib\UAP10\Plugin.Localization.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.UWP\bin\Release\Plugin.Localization.pdb"
+          target="lib\UAP10\Plugin.Localization.pdb" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll"
+          target="lib\UAP10\Plugin.Localization.Abstractions.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml"
+          target="lib\UAP10\Plugin.Localization.Abstractions.xml" />
+    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.pdb"
+          target="lib\UAP10\Plugin.Localization.Abstractions.pdb" />
 
     <!--Xamarin.Mac-->
     <!--<file src="Plugin.Localization\Plugin.Localization.Mac\bin\Release\Plugin.Localization.dll" target="lib\XamarinMac20\Plugin.Localization.dll" />
     <file src="Plugin.Localization\Plugin.Localization.Mac\bin\Release\Plugin.Localization.xml" target="lib\XamarinMac20\Plugin.Localization.xml" />
     <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll" target="lib\XamarinMac20\Plugin.Localization.Abstractions.dll" />
     <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml" target="lib\XamarinMac20\Plugin.Localization.Abstractions.xml" />-->
-    
-        
+
+
   </files>
 </package>

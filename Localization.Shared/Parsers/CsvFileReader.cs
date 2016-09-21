@@ -14,14 +14,12 @@ namespace Localization.Shared.Parsers
     {
         private readonly char delimiter;
 
-        public CsvFileReader(Stream stream, char delimiter = ';')
-            : base(stream)
+        public CsvFileReader(Stream stream, char delimiter = ';') : base(stream)
         {
             this.delimiter = delimiter;
         }
 
-        public CsvFileReader(string content, char delimiter = ';')
-            : base(GenerateStreamFromString(content))
+        public CsvFileReader(string content, char delimiter = ';') : base(GenerateStreamFromString(content))
         {
             this.delimiter = delimiter;
         }
@@ -36,8 +34,7 @@ namespace Localization.Shared.Parsers
 
                 var temp = line.Replace("\"\"", guillemet);
 
-                var regex = new Regex(
-                    @"""[^""]*""",
+                var regex = new Regex(@"""[^""]*""",
                     RegexOptions.IgnoreCase
                     | RegexOptions.Multiline
                     | RegexOptions.IgnorePatternWhitespace
@@ -95,7 +92,7 @@ namespace Localization.Shared.Parsers
             BaseStream.Position = 0;
             DiscardBufferedData();
 
-            while ((line = ReadLine()) != null)
+            while((line = ReadLine()) != null)
             {
                 completeLine += "\n" + line;
                 if(completeLine.ToCharArray().Count(c => c == '"')%2 == 0)

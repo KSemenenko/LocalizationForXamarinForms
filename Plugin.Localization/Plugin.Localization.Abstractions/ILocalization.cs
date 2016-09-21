@@ -8,6 +8,10 @@ namespace Plugin.Localization.Abstractions
     /// </summary>
     public interface ILocalization
     {
+        /// <summary>
+        /// Load CSV file from file system.
+        /// </summary>
+        /// <param name="path"></param>
         void LoadLanguagesFromFile(string path);
 
         void LoadLanguagesFromString(string content);
@@ -16,6 +20,11 @@ namespace Plugin.Localization.Abstractions
 
         string CurrentCulture { get; set; }
 
-        CultureInfo CurrentCultureInfo{ get; set; }
+        CultureInfo CurrentCultureInfo { get; set; }
+
+        /// <summary>
+        /// Leave unused languages.
+        /// </summary>
+        bool LeaveUnusedLanguages { get; set; }
     }
 }

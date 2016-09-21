@@ -6,21 +6,16 @@ using System.Text;
 using Plugin.Localization;
 using Xamarin.Forms;
 
-
 namespace TestFormsApp
 {
     public class App : Application
     {
         public App()
         {
-
-
             B_Clicked(null, null);
             var button = new Button();
             button.Text = CrossLocalization.Current["message2"];
             button.Clicked += B_Clicked;
-
-            
 
             // The root page of your application
             MainPage = new ContentPage
@@ -51,11 +46,6 @@ namespace TestFormsApp
             {
                 CrossLocalization.Current.CurrentCulture = "en-US";
             }
-
-
-
-
-
         }
 
         protected override void OnStart()

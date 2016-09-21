@@ -16,7 +16,7 @@ namespace Localization.Tests
 b1;""b2; b5""; b3
 c1; c2; c3";
 
-        private readonly string csvLang = @";en;ru
+        private readonly string csvLang = @"default:en;en;ru
 val1;v1_en; v1_ru
 val2;v2_en; v2_ru";
 
@@ -47,18 +47,17 @@ val2;v2_en; v2_ru";
             var header = reader.ReadHeader();
 
             header.ToArray().ShouldBeEquivalentTo(sampleList.Take(3));
-
         }
 
         [Test]
         public void ReadRows()
         {
-            using (var reader = new CsvFileReader(csv, ';'))
+            using(var reader = new CsvFileReader(csv, ';'))
             {
                 var resultList = new List<string>();
-                foreach (var row in reader.ReadRows())
+                foreach(var row in reader.ReadRows())
                 {
-                    foreach (var s in row)
+                    foreach(var s in row)
                     {
                         resultList.Add(s);
                     }
@@ -66,7 +65,6 @@ val2;v2_en; v2_ru";
 
                 resultList.ToArray().ShouldBeEquivalentTo(sampleList.Skip(3));
             }
-
         }
 
         [Test]
@@ -99,7 +97,6 @@ val2;v2_en; v2_ru";
 
             loc.CurrentCulture = "fr";
             loc["val1"].ShouldBeEquivalentTo("v1_en");
-
         }
 
         [Test]
@@ -113,7 +110,6 @@ val2;v2_en; v2_ru";
 
             loc.CurrentCulture = "fr";
             loc["val1"].ShouldBeEquivalentTo(string.Empty);
-
         }
     }
 }

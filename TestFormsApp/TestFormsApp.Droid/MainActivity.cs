@@ -20,16 +20,14 @@ namespace TestFormsApp.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             string content;
-            using (StreamReader sr = new StreamReader(Assets.Open("Languages.csv")))
+            using(StreamReader sr = new StreamReader(Assets.Open("Languages.csv")))
             {
                 content = sr.ReadToEnd();
             }
 
             Plugin.Localization.CrossLocalization.Current.LoadLanguagesFromString(content);
 
-
             LoadApplication(new TestFormsApp.App());
         }
     }
 }
-

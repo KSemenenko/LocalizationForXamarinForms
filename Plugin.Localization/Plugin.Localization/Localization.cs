@@ -2,7 +2,6 @@
 using Plugin.Localization;
 using Plugin.Localization.Abstractions;
 
-
 namespace Plugin.Localization
 {
     /// <summary>
@@ -10,7 +9,7 @@ namespace Plugin.Localization
     /// </summary>
     public class CrossLocalization
     {
-        private static readonly Lazy<ILocalization> Implementation = 
+        private static readonly Lazy<ILocalization> Implementation =
             new Lazy<ILocalization>(CreatePluginLocalization, System.Threading.LazyThreadSafetyMode.PublicationOnly);
 
         /// <summary>
@@ -21,7 +20,7 @@ namespace Plugin.Localization
             get
             {
                 var ret = Implementation.Value;
-                if (ret == null)
+                if(ret == null)
                 {
                     throw NotImplementedInReferenceAssembly();
                 }
@@ -43,4 +42,3 @@ namespace Plugin.Localization
         }
     }
 }
-
