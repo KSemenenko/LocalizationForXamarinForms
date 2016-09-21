@@ -105,10 +105,6 @@ namespace Plugin.Localization
                 return string.Empty;
                 
             }
-            set
-            {
-                
-            }
         }
 
         public string CurrentCulture

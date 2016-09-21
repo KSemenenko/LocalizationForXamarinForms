@@ -12,7 +12,7 @@ namespace Plugin.Localization.Abstractions
 
         void LoadLanguagesFromString(string content);
 
-        string this[string key] { get; set; }
+        string this[string key] { get; }
 
         string CurrentCulture { get; set; }
 

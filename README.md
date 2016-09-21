@@ -1,4 +1,4 @@
-# Localization Plugin for Xamarin and Windows
+﻿# Localization Plugin for Xamarin and Windows
 This project is a cross platform library for Xamarin Forms, which enables a handy use of localization in your applications.  
 
 
@@ -27,3 +27,11 @@ https://www.nuget.org/packages/ksemenenko.Localization/
 
 
 ```
+
+
+## Example csv
+|default:en-us|en-us|ru-ru|
+| ------------------- | :-----------: | :------------------: |
+|MainMenu_News|News|Новости|
+|MainMenu_Home|Home|Домой|
+
