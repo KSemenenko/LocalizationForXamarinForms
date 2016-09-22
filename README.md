@@ -34,8 +34,6 @@ https://www.nuget.org/packages/ksemenenko.Localization/
 
 #### Init:
 
-## First Step
-
 ```cs
 //load file from resources
 Stream stream = assembly.GetManifestResourceStream(resourcePrefix + "Languages.csv");
