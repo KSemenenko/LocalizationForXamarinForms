@@ -20,13 +20,6 @@ https://www.nuget.org/packages/ksemenenko.Localization/
 |Windows 10 UWP|Yes|10+|
 |Xamarin.Mac|Partial||
 
-## Example use:
-
-#### Init:
-```cs
-
-
-```
 
 
 ## Example csv structure:
@@ -35,4 +28,75 @@ https://www.nuget.org/packages/ksemenenko.Localization/
 |MainMenu_News|News|Новости|
 |MainMenu_Home|Home|Домой|
 |STRING_NAME|ENG_VALUE|RU_VALUE|
+
+
+## Example use:
+
+#### Init:
+
+## First Step
+
+```cs
+//load file from resources
+Stream stream = assembly.GetManifestResourceStream(resourcePrefix + "Languages.csv");
+string text = string.Empty;
+using(var reader = new StreamReader(stream))
+{
+    text = reader.ReadToEnd();
+}
+CrossLocalization.Current.LoadLanguagesFromString(text);
+
+//you can set the culture at hand
+CrossLocalization.Current.CurrentCulture = "ru-ru";
+
+//To remove unused languages from runtime
+CrossLocalization.Current.LeaveUnusedLanguages = false;
+
+//get localize value
+var localizeValue = CrossLocalization.Current["MainMenu_News"];
+
+```
+
+## For Xamarin Forms 
+You can create IMarkupExtension like this:
+```cs
+using System;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Plugin.Localization
+{
+    [ContentProperty("Source")]
+    public class LangugeExtension : IMarkupExtension
+    {
+        public string Source { get; set; }
+
+        public object ProvideValue(IServiceProvider serviceProvider)
+        {
+            if(Source == null)
+            {
+                return null;
+            }
+
+            return CrossLocalization.Current[Source];
+        }
+    }
+}
+```
+
+and them use in xaml:
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.View.TestPage"
+             xmlns:localization="using:Plugin.Localization"
+             BackgroundColor="White">
+  <Grid>
+    <Button Text="{localization:Languge MainMenu_News}"/>
+  </Grid>
+</ContentPage>
+```
+
 
