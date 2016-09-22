@@ -66,7 +66,7 @@ using Xamarin.Forms.Xaml;
 namespace Plugin.Localization
 {
     [ContentProperty("Source")]
-    public class LangugeExtension : IMarkupExtension
+    public class LanguageExtension : IMarkupExtension
     {
         public string Source { get; set; }
 
@@ -93,7 +93,7 @@ And them use in xaml:
              xmlns:localization="using:Plugin.Localization"
              BackgroundColor="White">
   <Grid>
-    <Button Text="{localization:Languge MainMenu_News}"/>
+    <Button Text="{localization:Language MainMenu_News}"/>
   </Grid>
 </ContentPage>
 ```
