@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -114,10 +116,8 @@ namespace Plugin.Localization
                     {
                         return GetCurrentCultureDictionary(defaultCultureCode, false);
                     }
-                    else
-                    {
-                        return new Dictionary<string, string>();
-                    }
+
+                    return new Dictionary<string, string>();
                 }
             }
 
@@ -145,6 +145,27 @@ namespace Plugin.Localization
             set { CurrentCultureInfo = new CultureInfo(value); }
         }
 
+        public dynamic Dynamic
+        {
+            get
+            {
+                IDictionary<string, object> dictionary = GetCurrentCultureDictionary(CurrentCulture).ToDictionary(pair => pair.Key, pair => (object)pair.Value);
+                return ToExpandoObject(dictionary);
+            }
+        }
+
         public bool LeaveUnusedLanguages { get; set; } = true;
+
+
+        private ExpandoObject ToExpandoObject(IDictionary<string, object> dictionary)
+        { 
+            var expando = new ExpandoObject();
+            var eoColl = (ICollection<KeyValuePair<string, object>>)expando;
+            foreach (var kvp in dictionary)
+            {
+                eoColl.Add(kvp);
+            }
+            return expando;
+        }
     }
 }

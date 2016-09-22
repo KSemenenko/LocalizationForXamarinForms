@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8.3">
     <id>ksemenenko.Localization</id>
-    <version>0.0.1.0</version>
+    <version>1.0.0.0</version>
     <title>Localization Plugin for Xamarin and Windows</title>
     <authors>ksemenenko</authors>
     <owners>ksemenenko</owners>
@@ -15,7 +15,7 @@
       This project is a cross platform library for Xamarin, which enables a handy use of localization in your applications.
     </description>
     <summary>Localization Plugin for Xamarin and Windows</summary>
-    <tags>xamarin, localization, language, pcl, plugin, plugin for xamarin, windows phone, uwp, winphone, wp8, winrt, android, xamarin.forms, ios, mac, version</tags>
+    <tags>xamarin, localization, language, pcl, plugin, plugin for xamarin, windows phone, uwp, winphone, wp8, winrt, android, forms, ios, mac, version, csv, lang</tags>
     <!--<dependencies>
       <group targetFramework="UAP10"/>
       <group targetFramework="wp8"/>

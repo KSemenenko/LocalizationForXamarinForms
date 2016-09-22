@@ -32,8 +32,6 @@ https://www.nuget.org/packages/ksemenenko.Localization/
 
 ## Example use:
 
-#### Init:
-
 ```cs
 //load file from resources
 Stream stream = assembly.GetManifestResourceStream(resourcePrefix + "Languages.csv");
@@ -52,6 +50,9 @@ CrossLocalization.Current.LeaveUnusedLanguages = false;
 
 //get localize value
 var localizeValue = CrossLocalization.Current["MainMenu_News"];
+
+//get dynamic localize value
+var localizeValue = CrossLocalization.Current.Dynamic.MainMenu_News;
 
 ```
 
@@ -82,7 +83,7 @@ namespace Plugin.Localization
 }
 ```
 
-and them use in xaml:
+And them use in xaml:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -96,5 +97,3 @@ and them use in xaml:
   </Grid>
 </ContentPage>
 ```
-
-

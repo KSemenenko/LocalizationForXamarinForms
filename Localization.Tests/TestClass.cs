@@ -111,5 +111,39 @@ val2;v2_en; v2_ru";
             loc.CurrentCulture = "fr";
             loc["val1"].ShouldBeEquivalentTo(string.Empty);
         }
+
+        [Test]
+        public void DynamicLoclaizeImplementEmptyFile()
+        {
+            var loc = new LocalizationImplementation();
+            loc.LoadLanguagesFromFile(string.Empty);
+
+            Action act = () =>
+            {
+                var l = loc.Dynamic.val1;
+            };
+
+            act.ShouldThrow<Exception>();
+
+        }
+
+        [Test]
+        public void DynamicLoclaizeImplement()
+        {
+            var loc = new LocalizationImplementation();
+            loc.LoadLanguagesFromFile(csvLang);
+
+            loc.CurrentCulture = "en";
+            (loc.Dynamic.val1 as object).ShouldBeEquivalentTo("v1_en");
+
+            loc.CurrentCulture = "ru";
+            (loc.Dynamic.val1 as object).ShouldBeEquivalentTo("v1_ru");
+
+            loc.CurrentCulture = "en";
+            (loc.Dynamic.val2 as object).ShouldBeEquivalentTo("v2_en");
+
+            loc.CurrentCulture = "ru";
+            (loc.Dynamic.val2 as object).ShouldBeEquivalentTo("v2_ru");
+        }
     }
 }

@@ -26,5 +26,7 @@ namespace Plugin.Localization.Abstractions
         /// Leave unused languages.
         /// </summary>
         bool LeaveUnusedLanguages { get; set; }
+
+        dynamic Dynamic { get; }
     }
 }
