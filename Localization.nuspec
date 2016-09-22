@@ -9,7 +9,7 @@
     <owners>ksemenenko</owners>
     <licenseUrl>https://github.com/KSemenenko/LocalizationForXamarinForms/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/KSemenenko/LocalizationForXamarinForms</projectUrl>
-    <!--<iconUrl>https://github.com/KSemenenko/LocalizationForXamarinForms/icons/plugin_icon_nuget.png</iconUrl>-->
+    <iconUrl>https://raw.githubusercontent.com/KSemenenko/LocalizationForXamarinForms/master/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
       This project is a cross platform library for Xamarin, which enables a handy use of localization in your applications.
