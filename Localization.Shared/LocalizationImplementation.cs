@@ -106,7 +106,7 @@ namespace Plugin.Localization
         private Dictionary<string, string> GetCurrentCultureDictionary(string culture, bool firstRequest = true)
         {
             Dictionary<string, string> langDictionary;
-            if(!languageDictionary.TryGetValue(CurrentCulture, out langDictionary))
+            if(!languageDictionary.TryGetValue(culture, out langDictionary))
             {
                 langDictionary = languageDictionary.FirstOrDefault().Value;
 
@@ -141,8 +141,19 @@ namespace Plugin.Localization
 
         public string CurrentCulture
         {
-            get { return CurrentCultureInfo?.Name.ToLowerInvariant(); }
-            set { CurrentCultureInfo = new CultureInfo(value); }
+            get { return CurrentCultureInfo?.Name.ToLowerInvariant() ?? CultureInfo.CurrentCulture.Name.ToLowerInvariant(); }
+            set
+            {
+                try
+                {
+                    CurrentCultureInfo = new CultureInfo(value);
+                }
+                catch(Exception)
+                {
+                    CurrentCultureInfo = CultureInfo.CurrentCulture;
+
+                } 
+            }
         }
 
         public dynamic Dynamic
