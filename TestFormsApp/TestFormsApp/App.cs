@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Plugin.Localization;
@@ -38,13 +39,13 @@ namespace TestFormsApp
 
         private void B_Clicked(object sender, EventArgs e)
         {
-            if(CrossLocalization.Current.CurrentCulture == "en-US")
+            if(CrossLocalization.Current.CurrentCulture.Equals(new CultureInfo("en-US")))
             {
-                CrossLocalization.Current.CurrentCulture = "ru-ru";
+                CrossLocalization.Current.CurrentCulture = new CultureInfo("ru-ru");
             }
             else
             {
-                CrossLocalization.Current.CurrentCulture = "en-US";
+                CrossLocalization.Current.CurrentCulture = new CultureInfo("en-US");
             }
         }
 

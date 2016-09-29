@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Plugin.Localization.Abstractions
@@ -18,9 +20,7 @@ namespace Plugin.Localization.Abstractions
 
         string this[string key] { get; }
 
-        string CurrentCulture { get; set; }
-
-        CultureInfo CurrentCultureInfo { get; set; }
+        CultureInfo CurrentCulture { get; set; }
 
         /// <summary>
         /// Leave unused languages.
@@ -28,5 +28,7 @@ namespace Plugin.Localization.Abstractions
         bool LeaveUnusedLanguages { get; set; }
 
         dynamic Dynamic { get; }
+
+        IList<LanguageInfo> Languages { get; }
     }
 }

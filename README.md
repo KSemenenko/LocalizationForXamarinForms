@@ -43,7 +43,10 @@ using(var reader = new StreamReader(stream))
 CrossLocalization.Current.LoadLanguagesFromString(text);
 
 //you can set the culture at hand
-CrossLocalization.Current.CurrentCulture = "ru-ru";
+CrossLocalization.Current.CurrentCulture = new CultureInfo("ru-RU");
+
+//or you can set the culture at hand
+CrossLocalization.Current.CurrentCulture = new CultureInfo("en");
 
 //To remove unused languages from runtime
 CrossLocalization.Current.LeaveUnusedLanguages = false;
@@ -53,6 +56,9 @@ var localizeValue = CrossLocalization.Current["MainMenu_News"];
 
 //get dynamic localize value
 var localizeValue = CrossLocalization.Current.Dynamic.MainMenu_News;
+
+//List of available  languages
+var langList = CrossLocalization.Current.Languages;
 
 ```
 

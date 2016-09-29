@@ -1,43 +1,39 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Threading;
+using Localization.Shared;
 using Localization.Shared.Parsers;
 using Plugin.Localization.Abstractions;
+using LanguageInfo = Plugin.Localization.Abstractions.LanguageInfo;
 
 namespace Plugin.Localization
 {
     public partial class LocalizationImplementation : ILocalization
     {
-        private Dictionary<string, Dictionary<string, string>> languageDictionary = new Dictionary<string, Dictionary<string, string>>();
-        private object sync = new object();
-        private string defaultCultureCode = string.Empty;
         private const string DefaultDelimeter = "default:";
+        private CultureInfo defaultCulture;
+        private Dictionary<CultureInfo, Dictionary<string, string>> languageDictionary = new Dictionary<CultureInfo, Dictionary<string, string>>();
+        public IList<LanguageInfo> Languages { get; } = new List<LanguageInfo>();
+        public string Delimiter { get; set; } = string.Empty;
+        public CultureInfo CurrentCulture { get; set; }
+        public bool LeaveUnusedLanguages { get; set; } = true;
 
         public LocalizationImplementation()
         {
-            CurrentCultureInfo = CultureInfo.CurrentCulture;
-            Delimiter = string.Empty;
+            CurrentCulture = CultureInfo.CurrentCulture;
         }
 
         public LocalizationImplementation(CultureInfo cultureInfo)
         {
-            CurrentCultureInfo = cultureInfo;
+            CurrentCulture = cultureInfo;
         }
 
         public LocalizationImplementation(string cultureInfo)
         {
-            CurrentCulture = cultureInfo;
+            CurrentCulture = new CultureInfo(cultureInfo);
         }
-
-        public CultureInfo CurrentCultureInfo { get; set; }
-
-        public string Delimiter { get; set; }
 
         public void LoadLanguagesFromFile(string path)
         {
@@ -50,9 +46,33 @@ namespace Plugin.Localization
             LoadLanguages(content);
         }
 
+        public string this[string key]
+        {
+            get
+            {
+                var langDictionary = GetCurrentCultureDictionary(CurrentCulture);
+                string message;
+                if(langDictionary.TryGetValue(key, out message))
+                {
+                    return message;
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public dynamic Dynamic
+        {
+            get
+            {
+                IDictionary<string, object> dictionary = GetCurrentCultureDictionary(CurrentCulture).ToDictionary(pair => pair.Key, pair => (object)pair.Value);
+                return ToExpandoObject(dictionary);
+            }
+        }
+
         private void LoadLanguages(string content)
         {
-            CsvFileReader reader = string.IsNullOrEmpty(Delimiter) ? new CsvFileReader(content) : new CsvFileReader(content, Delimiter[0]);
+            var reader = string.IsNullOrEmpty(Delimiter) ? new CsvFileReader(content) : new CsvFileReader(content, Delimiter[0]);
 
             MakeDictionary(reader);
             FillDictionary(reader);
@@ -61,21 +81,41 @@ namespace Plugin.Localization
 
         private void MakeDictionary(CsvFileReader reader)
         {
-            languageDictionary = new Dictionary<string, Dictionary<string, string>>();
+            languageDictionary = new Dictionary<CultureInfo, Dictionary<string, string>>();
             foreach(var header in reader.ReadHeader())
             {
                 if(!string.IsNullOrEmpty(header))
                 {
                     if(header.ToLowerInvariant().StartsWith(DefaultDelimeter))
                     {
-                        defaultCultureCode = header.Split(new string[] {DefaultDelimeter}, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? string.Empty;
+                        var defaultString = header.Split(new[] {DefaultDelimeter}, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+
+                        if(!string.IsNullOrEmpty(defaultString))
+                        {
+                            defaultCulture = new CultureInfo(defaultString);
+                        }
                     }
                     else
                     {
-                        languageDictionary.Add(header.ToLowerInvariant(), new Dictionary<string, string>());
+                        AddLanguageInfo(header);
+                        languageDictionary.Add(new CultureInfo(header), new Dictionary<string, string>());
                     }
                 }
             }
+        }
+
+        private void AddLanguageInfo(string cultureCode)
+        {
+            var cultureInfo = new CultureInfo(cultureCode);
+            var info = new LanguageInfo
+            {
+                DisplayName = cultureInfo.DisplayName,
+                EnglishName = cultureInfo.EnglishName,
+                NativeName = cultureInfo.NativeName,
+                Name = cultureInfo.Name,
+                TwoLetterName = cultureInfo.TwoLetterISOLanguageName,
+            };
+            Languages.Add(info);
         }
 
         private void ClearDictionary()
@@ -94,7 +134,7 @@ namespace Plugin.Localization
         {
             foreach(var row in reader.ReadRows())
             {
-                int count = 1;
+                var count = 1;
                 foreach(var item in languageDictionary)
                 {
                     item.Value.Add(row[0], row[count]);
@@ -103,78 +143,55 @@ namespace Plugin.Localization
             }
         }
 
-        private Dictionary<string, string> GetCurrentCultureDictionary(string culture, bool firstRequest = true)
+        private Dictionary<string, string> GetCurrentCultureDictionary(CultureInfo culture)
         {
-            Dictionary<string, string> langDictionary;
-            if(!languageDictionary.TryGetValue(culture, out langDictionary))
+            Dictionary<string, string> currentDictionary;
+            if(!languageDictionary.TryGetValue(culture, out currentDictionary))
             {
-                langDictionary = languageDictionary.FirstOrDefault().Value;
-
-                if(langDictionary == null)
+                if (culture.Name.Length == 2)
                 {
-                    if(!string.IsNullOrEmpty(defaultCultureCode) && firstRequest)
+                    foreach (var item in languageDictionary)
                     {
-                        return GetCurrentCultureDictionary(defaultCultureCode, false);
+                        if (item.Key.TwoLetterISOLanguageName == culture.Name)
+                        {
+                            return item.Value;
+                        }
                     }
-
-                    return new Dictionary<string, string>();
-                }
-            }
-
-            return langDictionary;
-        }
-
-        public string this[string key]
-        {
-            get
-            {
-                Dictionary<string, string> langDictionary = GetCurrentCultureDictionary(CurrentCulture);
-                string message;
-                if(langDictionary.TryGetValue(key, out message))
-                {
-                    return message;
                 }
 
-                return string.Empty;
-            }
-        }
-
-        public string CurrentCulture
-        {
-            get { return CurrentCultureInfo?.Name.ToLowerInvariant() ?? CultureInfo.CurrentCulture.Name.ToLowerInvariant(); }
-            set
-            {
-                try
+                if (culture.Name.Length > 2)
                 {
-                    CurrentCultureInfo = new CultureInfo(value);
+                    foreach (var item in languageDictionary)
+                    {
+                        if (item.Key.TwoLetterISOLanguageName == culture.TwoLetterISOLanguageName)
+                        {
+                            return item.Value;
+                        }
+                    }
                 }
-                catch(Exception)
+
+                if (defaultCulture != null)
                 {
-                    CurrentCultureInfo = CultureInfo.CurrentCulture;
+                    if(languageDictionary.TryGetValue(defaultCulture, out currentDictionary))
+                    {
+                        return currentDictionary;
+                    }
+                    
+                }
 
-                } 
+                return new Dictionary<string, string>();
             }
+
+            return currentDictionary;
         }
-
-        public dynamic Dynamic
-        {
-            get
-            {
-                IDictionary<string, object> dictionary = GetCurrentCultureDictionary(CurrentCulture).ToDictionary(pair => pair.Key, pair => (object)pair.Value);
-                return ToExpandoObject(dictionary);
-            }
-        }
-
-        public bool LeaveUnusedLanguages { get; set; } = true;
-
 
         private ExpandoObject ToExpandoObject(IDictionary<string, object> dictionary)
-        { 
+        {
             var expando = new ExpandoObject();
-            var eoColl = (ICollection<KeyValuePair<string, object>>)expando;
-            foreach (var kvp in dictionary)
+            var eoCol = (ICollection<KeyValuePair<string, object>>)expando;
+            foreach(var kvp in dictionary)
             {
-                eoColl.Add(kvp);
+                eoCol.Add(kvp);
             }
             return expando;
         }

@@ -9,6 +9,7 @@
     <Import_RootNamespace>Localization.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)LanguageInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LocalizationImplementation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parsers\CsvFileReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parsers\CsvRow.cs" />
