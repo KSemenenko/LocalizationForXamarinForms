@@ -48,12 +48,9 @@ namespace Localization.Shared.Parsers
                 }
 
                 var row = new CsvRow();
-                var split = temp.Split(delimiter);
+                var split = temp.Split(new []{delimiter}, StringSplitOptions.RemoveEmptyEntries);
 
-                foreach(var s in split)
-                {
-                    row.Add(ReplaceKeys(s.Trim(), keys));
-                }
+                row.AddRange(split.Select(s => ReplaceKeys(s.Trim(), keys)));
 
                 yield return row;
             }

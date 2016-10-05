@@ -228,5 +228,70 @@ val2;v2_en; v2_ru";
             loc.CurrentCulture = new CultureInfo("ru");
             (loc.Dynamic.val2 as object).ShouldBeEquivalentTo("v2_ru");
         }
+
+        [Test]
+        public void MissingCellWithReplaceDefaultValueTest()
+        {
+            string slongLang = @"default:en-US;en-US;ru-RU;it-IT
+val1;v1_en; v1_ru; v1_it
+val2;v2_en;
+val3;v3_en; v3_ru; v3_it
+";
+
+            var c1 = new CultureInfo("ru");
+            var c2 = new CultureInfo("en");
+            var c3 = new CultureInfo("it");
+
+            var loc = new LocalizationImplementation();
+            loc.LoadLanguagesFromFile(slongLang);
+
+            loc.CurrentCulture = c1;
+            loc["val1"].ShouldBeEquivalentTo("v1_ru");
+            loc["val2"].ShouldBeEquivalentTo("v2_en");
+            loc["val3"].ShouldBeEquivalentTo("v3_ru");
+
+            loc.CurrentCulture = c2;
+            loc["val1"].ShouldBeEquivalentTo("v1_en");
+            loc["val2"].ShouldBeEquivalentTo("v2_en");
+            loc["val3"].ShouldBeEquivalentTo("v3_en");
+
+            loc.CurrentCulture = c3;
+            loc["val1"].ShouldBeEquivalentTo("v1_it");
+            loc["val2"].ShouldBeEquivalentTo("v2_en");
+            loc["val3"].ShouldBeEquivalentTo("v3_it");
+        }
+
+        [Test]
+        public void MissingCellTest()
+        {
+            string slongLang = @";en-US;ru-RU;it-IT
+val1;v1_en; v1_ru; v1_it
+val2;v2_en;
+val3;v3_en; v3_ru; v3_it
+";
+
+            var c1 = new CultureInfo("ru");
+            var c2 = new CultureInfo("en");
+            var c3 = new CultureInfo("it");
+
+            var loc = new LocalizationImplementation();
+            loc.LoadLanguagesFromFile(slongLang);
+
+            loc.CurrentCulture = c1;
+            loc["val1"].ShouldBeEquivalentTo("v1_ru");
+            loc["val2"].ShouldBeEquivalentTo(string.Empty);
+            loc["val3"].ShouldBeEquivalentTo("v3_ru");
+
+            loc.CurrentCulture = c2;
+            loc["val1"].ShouldBeEquivalentTo("v1_en");
+            loc["val2"].ShouldBeEquivalentTo("v2_en");
+            loc["val3"].ShouldBeEquivalentTo("v3_en");
+
+            loc.CurrentCulture = c3;
+            loc["val1"].ShouldBeEquivalentTo("v1_it");
+            loc["val2"].ShouldBeEquivalentTo(string.Empty);
+            loc["val3"].ShouldBeEquivalentTo("v3_it");
+        }
+
     }
 }

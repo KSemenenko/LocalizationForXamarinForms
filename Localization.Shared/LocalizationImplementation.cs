@@ -50,16 +50,28 @@ namespace Plugin.Localization
         {
             get
             {
-                var langDictionary = GetCurrentCultureDictionary(CurrentCulture);
-                string message;
-                if(langDictionary.TryGetValue(key, out message))
-                {
-                    return message;
-                }
-
-                return string.Empty;
+                return GetValue(key, CurrentCulture);
             }
         }
+
+        private string GetValue(string key, CultureInfo culture)
+        {
+            var langDictionary = GetCurrentCultureDictionary(culture);
+            string message;
+           
+            if (langDictionary.TryGetValue(key, out message))
+            {
+                return message;
+            }
+
+            if(CurrentCulture != defaultCulture && defaultCulture != null)
+            {
+                return GetValue(key, defaultCulture);
+            }
+
+            return string.Empty;
+        }
+
 
         public dynamic Dynamic
         {
@@ -137,7 +149,15 @@ namespace Plugin.Localization
                 var count = 1;
                 foreach(var item in languageDictionary)
                 {
-                    item.Value.Add(row[0], row[count]);
+                    try
+                    {
+                         item.Value.Add(row[0], row[count]);
+                    }
+                    catch(ArgumentOutOfRangeException ex)
+                    {
+                        //item.Value.Add(row[0], null);
+                    }
+                    
                     count++;
                 }
             }
