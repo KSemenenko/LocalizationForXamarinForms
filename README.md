@@ -18,7 +18,7 @@ https://www.nuget.org/packages/ksemenenko.Localization/
 |Windows Phone 8.1|Yes|8.1+|
 |Windows Store|Yes|8.1+|
 |Windows 10 UWP|Yes|10+|
-|Xamarin.Mac|Partial||
+|Xamarin.Mac|Yes||
 
 
 

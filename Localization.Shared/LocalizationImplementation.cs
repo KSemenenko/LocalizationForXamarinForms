@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
-using Localization.Shared;
 using Localization.Shared.Parsers;
 using Plugin.Localization.Abstractions;
-using LanguageInfo = Plugin.Localization.Abstractions.LanguageInfo;
 
 namespace Plugin.Localization
 {
@@ -15,10 +13,6 @@ namespace Plugin.Localization
         private const string DefaultDelimeter = "default:";
         private CultureInfo defaultCulture;
         private Dictionary<CultureInfo, Dictionary<string, string>> languageDictionary = new Dictionary<CultureInfo, Dictionary<string, string>>();
-        public IList<LanguageInfo> Languages { get; } = new List<LanguageInfo>();
-        public string Delimiter { get; set; } = string.Empty;
-        public CultureInfo CurrentCulture { get; set; }
-        public bool LeaveUnusedLanguages { get; set; } = true;
 
         public LocalizationImplementation()
         {
@@ -35,6 +29,11 @@ namespace Plugin.Localization
             CurrentCulture = new CultureInfo(cultureInfo);
         }
 
+        public string Delimiter { get; set; } = string.Empty;
+        public IList<LanguageInfo> Languages { get; } = new List<LanguageInfo>();
+        public CultureInfo CurrentCulture { get; set; }
+        public bool LeaveUnusedLanguages { get; set; } = true;
+
         public void LoadLanguagesFromFile(string path)
         {
             var content = FileLoad(path);
@@ -48,30 +47,20 @@ namespace Plugin.Localization
 
         public string this[string key]
         {
+            get { return GetValue(key, CurrentCulture); }
+        }
+
+        public IEnumerable<string> this[params string[] key]
+        {
             get
             {
-                return GetValue(key, CurrentCulture);
+                foreach (var item in key)
+                {
+                    yield return  GetValue(item, CurrentCulture);
+                }
+                
             }
         }
-
-        private string GetValue(string key, CultureInfo culture)
-        {
-            var langDictionary = GetCurrentCultureDictionary(culture);
-            string message;
-           
-            if (langDictionary.TryGetValue(key, out message))
-            {
-                return message;
-            }
-
-            if(CurrentCulture != defaultCulture && defaultCulture != null)
-            {
-                return GetValue(key, defaultCulture);
-            }
-
-            return string.Empty;
-        }
-
 
         public dynamic Dynamic
         {
@@ -82,10 +71,29 @@ namespace Plugin.Localization
             }
         }
 
+        private string GetValue(string key, CultureInfo culture)
+        {
+            var langDictionary = GetCurrentCultureDictionary(culture);
+            string message;
+
+            if (langDictionary.TryGetValue(key, out message))
+            {
+                return message;
+            }
+
+            if (CurrentCulture != defaultCulture && defaultCulture != null)
+            {
+                return GetValue(key, defaultCulture);
+            }
+
+            return string.Empty;
+        }
+
         private void LoadLanguages(string content)
         {
             var reader = string.IsNullOrEmpty(Delimiter) ? new CsvFileReader(content) : new CsvFileReader(content, Delimiter[0]);
 
+            Languages.Clear();
             MakeDictionary(reader);
             FillDictionary(reader);
             ClearDictionary();
@@ -94,15 +102,15 @@ namespace Plugin.Localization
         private void MakeDictionary(CsvFileReader reader)
         {
             languageDictionary = new Dictionary<CultureInfo, Dictionary<string, string>>();
-            foreach(var header in reader.ReadHeader())
+            foreach (var header in reader.ReadHeader())
             {
-                if(!string.IsNullOrEmpty(header))
+                if (!string.IsNullOrEmpty(header))
                 {
-                    if(header.ToLowerInvariant().StartsWith(DefaultDelimeter))
+                    if (header.ToLowerInvariant().StartsWith(DefaultDelimeter))
                     {
                         var defaultString = header.Split(new[] {DefaultDelimeter}, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
 
-                        if(!string.IsNullOrEmpty(defaultString))
+                        if (!string.IsNullOrEmpty(defaultString))
                         {
                             defaultCulture = new CultureInfo(defaultString);
                         }
@@ -118,7 +126,6 @@ namespace Plugin.Localization
 
         private void AddLanguageInfo(string cultureCode)
         {
-            Languages.Clear();
             var cultureInfo = new CultureInfo(cultureCode);
             var info = new LanguageInfo
             {
@@ -126,17 +133,17 @@ namespace Plugin.Localization
                 EnglishName = cultureInfo.EnglishName,
                 NativeName = cultureInfo.NativeName,
                 Name = cultureInfo.Name,
-                TwoLetterName = cultureInfo.TwoLetterISOLanguageName,
+                TwoLetterName = cultureInfo.TwoLetterISOLanguageName
             };
             Languages.Add(info);
         }
 
         private void ClearDictionary()
         {
-            if(!LeaveUnusedLanguages)
+            if (!LeaveUnusedLanguages)
             {
                 var items = languageDictionary.Where(w => w.Key != CurrentCulture).ToList();
-                foreach(var item in items)
+                foreach (var item in items)
                 {
                     languageDictionary.Remove(item.Key);
                 }
@@ -145,20 +152,20 @@ namespace Plugin.Localization
 
         private void FillDictionary(CsvFileReader reader)
         {
-            foreach(var row in reader.ReadRows())
+            foreach (var row in reader.ReadRows())
             {
                 var count = 1;
-                foreach(var item in languageDictionary)
+                foreach (var item in languageDictionary)
                 {
                     try
                     {
-                         item.Value.Add(row[0], row[count]);
+                        item.Value.Add(row[0], row[count]);
                     }
-                    catch(ArgumentOutOfRangeException ex)
+                    catch (ArgumentOutOfRangeException ex)
                     {
-                        //item.Value.Add(row[0], null);
+                        //hide exception
                     }
-                    
+
                     count++;
                 }
             }
@@ -167,7 +174,7 @@ namespace Plugin.Localization
         private Dictionary<string, string> GetCurrentCultureDictionary(CultureInfo culture)
         {
             Dictionary<string, string> currentDictionary;
-            if(!languageDictionary.TryGetValue(culture, out currentDictionary))
+            if (!languageDictionary.TryGetValue(culture, out currentDictionary))
             {
                 if (culture.Name.Length == 2)
                 {
@@ -193,11 +200,10 @@ namespace Plugin.Localization
 
                 if (defaultCulture != null)
                 {
-                    if(languageDictionary.TryGetValue(defaultCulture, out currentDictionary))
+                    if (languageDictionary.TryGetValue(defaultCulture, out currentDictionary))
                     {
                         return currentDictionary;
                     }
-                    
                 }
 
                 return new Dictionary<string, string>();
@@ -210,7 +216,7 @@ namespace Plugin.Localization
         {
             var expando = new ExpandoObject();
             var eoCol = (ICollection<KeyValuePair<string, object>>)expando;
-            foreach(var kvp in dictionary)
+            foreach (var kvp in dictionary)
             {
                 eoCol.Add(kvp);
             }
