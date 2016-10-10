@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8.3">
     <id>ksemenenko.Localization</id>
-    <version>1.0.2.0</version>
+    <version>1.0.2.1</version>
     <title>Localization Plugin for Xamarin and Windows</title>
     <authors>ksemenenko</authors>
     <owners>ksemenenko</owners>
@@ -156,11 +156,8 @@
           target="lib\UAP10\Plugin.Localization.Abstractions.pdb" />
 
     <!--Xamarin.Mac-->
-    <!--<file src="Plugin.Localization\Plugin.Localization.Mac\bin\Release\Plugin.Localization.dll" target="lib\XamarinMac20\Plugin.Localization.dll" />
+    <file src="Plugin.Localization\Plugin.Localization.Mac\bin\Release\Plugin.Localization.dll" target="lib\XamarinMac20\Plugin.Localization.dll" />
     <file src="Plugin.Localization\Plugin.Localization.Mac\bin\Release\Plugin.Localization.xml" target="lib\XamarinMac20\Plugin.Localization.xml" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.dll" target="lib\XamarinMac20\Plugin.Localization.Abstractions.dll" />
-    <file src="Plugin.Localization\Plugin.Localization.Abstractions\bin\Release\Plugin.Localization.Abstractions.xml" target="lib\XamarinMac20\Plugin.Localization.Abstractions.xml" />-->
-
 
   </files>
 </package>

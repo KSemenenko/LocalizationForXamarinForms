@@ -67,6 +67,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Plugin.Localization.Abstractions\ILocalization.cs">
+      <Link>ILocalization.cs</Link>
+    </Compile>
+    <Compile Include="..\Plugin.Localization.Abstractions\LanguageInfo.cs">
+      <Link>LanguageInfo.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\Localization.Shared\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
@@ -74,14 +80,7 @@
     <Compile Include="..\Plugin.Localization\Localization.cs">
       <Link>Localization.cs</Link>
     </Compile>
-    <Compile Include="DeviceInfo.cs" />
     <Compile Include="LocalizationImplementation.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Plugin.Localization.Abstractions\Plugin.Localization.Abstractions.csproj">
-      <Project>{6EDB0588-FFC5-4EF5-8A99-9E241D0F878D}</Project>
-      <Name>Plugin.Localization.Abstractions</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\Localization.Shared\Localization.Shared.projitems" Label="Shared" Condition="Exists('..\..\Localization.Shared\Localization.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />

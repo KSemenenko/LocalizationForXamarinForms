@@ -118,6 +118,7 @@ namespace Plugin.Localization
 
         private void AddLanguageInfo(string cultureCode)
         {
+            Languages.Clear();
             var cultureInfo = new CultureInfo(cultureCode);
             var info = new LanguageInfo
             {
