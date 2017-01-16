@@ -78,7 +78,7 @@ namespace Localization.Shared.Parsers
         private string ReplaceKeys(string s, Dictionary<string, string> keys)
         {
             s = keys.Keys.Reverse().Aggregate(s, (current, key) => current.Replace(key, keys[key]));
-            return s.StartsWith("\"") && s.EndsWith("\"") ? s.Substring(1, s.Length - 2) : s;
+            return s.StartsWith("\"") && s.EndsWith("\"") ? (s.Length > 2 ? s.Substring(1, s.Length - 2) : String.Empty) : s;
         }
 
         private IEnumerable<string> ReadCompleteLine()
