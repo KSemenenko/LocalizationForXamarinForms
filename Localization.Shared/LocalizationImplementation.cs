@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
+using Localization.Shared;
 using Localization.Shared.Parsers;
 using Plugin.Localization.Abstractions;
+using LanguageInfo = Plugin.Localization.Abstractions.LanguageInfo;
 
 namespace Plugin.Localization
 {
@@ -56,19 +58,14 @@ namespace Plugin.Localization
             {
                 foreach (var item in key)
                 {
-                    yield return  GetValue(item, CurrentCulture);
+                    yield return GetValue(item, CurrentCulture);
                 }
-                
             }
         }
 
         public dynamic Dynamic
         {
-            get
-            {
-                IDictionary<string, object> dictionary = GetCurrentCultureDictionary(CurrentCulture).ToDictionary(pair => pair.Key, pair => (object)pair.Value);
-                return ToExpandoObject(dictionary);
-            }
+            get { return new LocalizationDynamicObject(GetCurrentCultureDictionary(CurrentCulture).ToDictionary(pair => pair.Key, pair => (object)pair.Value)); }
         }
 
         private string GetValue(string key, CultureInfo culture)
@@ -210,17 +207,6 @@ namespace Plugin.Localization
             }
 
             return currentDictionary;
-        }
-
-        private ExpandoObject ToExpandoObject(IDictionary<string, object> dictionary)
-        {
-            var expando = new ExpandoObject();
-            var eoCol = (ICollection<KeyValuePair<string, object>>)expando;
-            foreach (var kvp in dictionary)
-            {
-                eoCol.Add(kvp);
-            }
-            return expando;
         }
     }
 }

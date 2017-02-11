@@ -26,12 +26,12 @@ val2;v2_en; v2_ru";
         [Test]
         public void ReadAllRows()
         {
-            using(var reader = new CsvFileReader(csv, ';'))
+            using (var reader = new CsvFileReader(csv, ';'))
             {
                 var resultList = new List<string>();
-                foreach(var row in reader.ReadAllRows())
+                foreach (var row in reader.ReadAllRows())
                 {
-                    foreach(var s in row)
+                    foreach (var s in row)
                     {
                         resultList.Add(s);
                     }
@@ -53,12 +53,12 @@ val2;v2_en; v2_ru";
         [Test]
         public void ReadRows()
         {
-            using(var reader = new CsvFileReader(csv, ';'))
+            using (var reader = new CsvFileReader(csv, ';'))
             {
                 var resultList = new List<string>();
-                foreach(var row in reader.ReadRows())
+                foreach (var row in reader.ReadRows())
                 {
-                    foreach(var s in row)
+                    foreach (var s in row)
                     {
                         resultList.Add(s);
                     }
@@ -119,9 +119,9 @@ val2;v2_en; v2_ru";
             var loc = new LocalizationImplementation();
             loc.LoadLanguagesFromFile(string.Empty);
 
-            Action act = () => { var l = loc.Dynamic.val1; };
+            var test = loc.Dynamic.val1;
 
-            act.ShouldThrow<Exception>();
+            Assert.IsNull(test);
         }
 
         [Test]
@@ -203,7 +203,6 @@ val2;v2_en; v2_ru";
             loc.CurrentCulture = c2;
             loc["val1"].ShouldBeEquivalentTo("v1_en");
             loc["val2"].ShouldBeEquivalentTo("v2_en");
-
 
             loc.CurrentCulture = c3;
             loc["val1"].ShouldBeEquivalentTo("v1_en");
@@ -292,6 +291,5 @@ val3;v3_en; v3_ru; v3_it
             loc["val2"].ShouldBeEquivalentTo(string.Empty);
             loc["val3"].ShouldBeEquivalentTo("v3_it");
         }
-
     }
 }
